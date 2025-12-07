@@ -11,7 +11,6 @@ import aoc
 
 
 def benchmark(func: callable, file_path: str, seconds=3) -> list:
-
     times = []
 
     start = time.time()
@@ -23,7 +22,6 @@ def benchmark(func: callable, file_path: str, seconds=3) -> list:
 
 
 def time_function(func: callable, file_path: str) -> float:
-
     start = time.time()
     func(file_path)
     return time.time() - start
@@ -43,7 +41,6 @@ def get_modules():
 
 
 def run_benchmarks(seconds=3):
-
     module_dict = get_modules()
 
     for key, value in tqdm(module_dict.items()):
@@ -53,7 +50,6 @@ def run_benchmarks(seconds=3):
 
 
 def save_figure(df):
-
     df = df.T.melt(var_name="function", value_name="runtime").dropna()
     df["day"] = df["function"].str.slice(4, 6).apply(int)
     df["part"] = df["function"].str.slice(-1).apply(int)

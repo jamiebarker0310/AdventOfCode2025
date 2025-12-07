@@ -1,16 +1,27 @@
 [project]
 name = "adventofcode2025"
 version = "0.1.0"
-description = "Add your description here"
+description = "Advent of Code 2025 Solutions"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "jinja2>=3.1.6",
     "matplotlib>=3.10.7",
     "pandas>=2.3.3",
-    "pytest>=9.0.1",
-    "ruff>=0.14.7",
     "seaborn>=0.13.2",
     "tqdm>=4.67.1",
 ]
 
+[dependency-groups]
+dev = [
+    "pytest>=9.0.1",
+    "ruff>=0.14.7",
+]
+
+# --- Build System and Package Configuration ---
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["aoc"]
