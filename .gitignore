@@ -3,3 +3,4 @@ aoc/inputs/*
 */__pycache__/*
 .vscode/
 *.code-workspace
+*.egg-info
