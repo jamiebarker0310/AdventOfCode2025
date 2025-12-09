@@ -3,13 +3,14 @@ import heapq
 from itertools import combinations
 import math
 
-def get_circuit(node, graph, circuit):
 
+def get_circuit(node, graph, circuit):
     for neighbour in graph[node]:
         if neighbour not in circuit:
             circuit.add(neighbour)
             circuit = get_circuit(neighbour, graph, circuit)
     return circuit
+
 
 def part_one(file_path: str, n=1000):
     """[summary]
@@ -24,16 +25,20 @@ def part_one(file_path: str, n=1000):
     # read file
     with open(file_path) as f:
         lines = f.readlines()
-    
+
     boxes = [tuple(int(x) for x in line.split(",")) for line in lines]
 
     distances = {}
     for i, b1 in enumerate(boxes[:-1]):
-        for b2 in boxes[i+1:]:
-            dist = sum((p1 - p2)**2 for p1, p2 in zip(b1, b2))
-            distances[(b1,b2)] = dist
+        for b2 in boxes[i + 1 :]:
+            dist = sum((p1 - p2) ** 2 for p1, p2 in zip(b1, b2))
+            distances[(b1, b2)] = dist
 
-    edges = heapq.nsmallest(n, combinations(boxes,2), key=lambda x: sum((p1 - p2)**2 for p1, p2 in zip(x[0], x[1])))
+    edges = heapq.nsmallest(
+        n,
+        combinations(boxes, 2),
+        key=lambda x: sum((p1 - p2) ** 2 for p1, p2 in zip(x[0], x[1])),
+    )
 
     graph = defaultdict(set)
     for n1, n2 in edges:
@@ -57,14 +62,14 @@ def part_two(file_path: str):
 
     with open(file_path) as f:
         lines = f.readlines()
-    
+
     boxes = [tuple(int(x) for x in line.split(",")) for line in lines]
 
     distances = {}
     for i, b1 in enumerate(boxes[:-1]):
-        for b2 in boxes[i+1:]:
-            dist = sum((p1 - p2)**2 for p1, p2 in zip(b1, b2))
-            distances[(b1,b2)] = dist
+        for b2 in boxes[i + 1 :]:
+            dist = sum((p1 - p2) ** 2 for p1, p2 in zip(b1, b2))
+            distances[(b1, b2)] = dist
 
     ordered_edges = sorted(distances.keys(), key=distances.get)
 
